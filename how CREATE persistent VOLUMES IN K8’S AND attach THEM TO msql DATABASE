@@ -1,7 +1,7 @@
 how CREATE persistent VOLUMES IN K8’S AND attach THEM TO msql DATABASE 
 
 
-https://chatgpt.com/share/67c340ab-9d40-8006-9013-ac66fe199478 
+to get the code : https://chatgpt.com/share/67c340ab-9d40-8006-9013-ac66fe199478 
 
 
 To create persistent volumes in Kubernetes and attach them to an MySQL database, follow these steps:
@@ -25,6 +25,7 @@ spec:
  
 2. Create a PersistentVolumeClaim (PVC)
 A PersistentVolumeClaim (PVC) is a request for storage by a pod.
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -39,6 +40,7 @@ spec:
  
 3. Deploy MySQL with PVC
 Now, deploy the MySQL database and mount the PersistentVolumeClaim (PVC).
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -71,6 +73,7 @@ spec:
  
 4. Create a MySQL Service
 Expose MySQL using a service.
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -92,6 +95,7 @@ kubectl apply -f mysql-service.yaml
  
 6. Verify the Setup
 Check if the Persistent Volume (PV) and Persistent Volume Claim (PVC) are bound:
+
 kubectl get pv
 kubectl get pvc
 Check if the MySQL pod is running:
