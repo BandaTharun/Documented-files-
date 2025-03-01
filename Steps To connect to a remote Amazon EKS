@@ -36,7 +36,8 @@ aws --version
 
 aws configure
 
-Enter your AWS Access Key ID, Secret Access Key, Region, and Output format.
+Enter your AWS Access Key ID, Secret Access Key, Region, and Output format , if u dont have login to the aws website and go to security and go the secrect accesskey and select to create new ,
+u will get the access key id and password , pass it while in aws configure .
 
 -To verify:
 
