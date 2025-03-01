@@ -1,0 +1,105 @@
+how CREATE persistent VOLUMES IN K8’S AND attach THEM TO msql DATABASE 
+
+
+https://chatgpt.com/share/67c340ab-9d40-8006-9013-ac66fe199478 
+
+
+To create persistent volumes in Kubernetes and attach them to an MySQL database, follow these steps:
+ 
+1. Create a PersistentVolume (PV)
+A PersistentVolume (PV) is a storage resource in the cluster that can be claimed by a pod.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  hostPath:
+    path: "/mnt/data"  # For testing, use an NFS or cloud storage for production.
+ 
+2. Create a PersistentVolumeClaim (PVC)
+A PersistentVolumeClaim (PVC) is a request for storage by a pod.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: manual
+ 
+3. Deploy MySQL with PVC
+Now, deploy the MySQL database and mount the PersistentVolumeClaim (PVC).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "password"
+          volumeMounts:
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+ 
+4. Create a MySQL Service
+Expose MySQL using a service.
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  ports:
+    - port: 3306
+      targetPort: 3306
+  selector:
+    app: mysql
+  clusterIP: None  # Headless service for internal communication
+ 
+5. Apply the YAML Files
+Apply all the YAML configurations:
+kubectl apply -f mysql-pv.yaml
+kubectl apply -f mysql-pvc.yaml
+kubectl apply -f mysql-deployment.yaml
+kubectl apply -f mysql-service.yaml
+ 
+6. Verify the Setup
+Check if the Persistent Volume (PV) and Persistent Volume Claim (PVC) are bound:
+kubectl get pv
+kubectl get pvc
+Check if the MySQL pod is running:
+kubectl get pods
+Access the MySQL pod:
+kubectl exec -it <mysql-pod-name> -- mysql -u root -p
+ 
+Storage Considerations
+•	Cloud Storage: If running in AWS, use awsElasticBlockStore. For GCP, use gcePersistentDisk.
+•	NFS (Network File System): For multi-node clusters, use NFS instead of hostPath.
+Would you like an example using AWS EBS, NFS, or another storage backend? 🚀
+
