@@ -8,6 +8,7 @@ To create persistent volumes in Kubernetes and attach them to an MySQL database,
  
 1. Create a PersistentVolume (PV)
 A PersistentVolume (PV) is a storage resource in the cluster that can be claimed by a pod.
+
 apiVersion: v1
 kind: PersistentVolume
 metadata:
