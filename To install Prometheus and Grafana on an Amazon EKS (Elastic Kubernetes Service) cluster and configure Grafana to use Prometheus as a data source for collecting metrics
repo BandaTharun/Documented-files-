@@ -1,4 +1,8 @@
-if u want to see how to expose service using node port go to code line 115 , for   load blancer ingress and node port go to code 
+To install Prometheus and Grafana on an Amazon EKS (Elastic Kubernetes Service) cluster and configure Grafana to use Prometheus 
+as a data source for collecting metrics and exposing it using node port , load blancer and ingress service falow this file . 
+
+if u want to see how to expose service using node port go to code line 115 , for exposing service using load blancer go to code line 175 , 
+ingress and node port go to code 204
 
 Steps To install Prometheus and Grafana on an Amazon EKS (Elastic
 Kubernetes Service) cluster and configure Grafana to use Prometheus
@@ -6,8 +10,8 @@ as a data source for collecting metrics,
 
 follow these step-by-step
 instructions.
-To copy code : https://chatgpt.com/share/67c30ba2-3af4-8006-a925-
-248a5ff047be .
+To copy code :  https://chatgpt.com/share/67c30ba2-3af4-8006-a925-248a5ff047be 
+
 
 Step 1: Deploy Prometheus & Grafana Using Helm
 We will use the Prometheus Community Helm Chart to deploy both Prometheus and
@@ -172,14 +176,19 @@ inbound rules.
 2⃣ to  Expose Services Using LoadBalancer
 A LoadBalancer exposes the service externally via an AWS ELB.
 Modify Prometheus Service to Use LoadBalancer
+
 kubectl patch svc prometheus-kube-prometheus-prometheus -n monitoring -p
 '{"spec": {"type": "LoadBalancer"}}'
+
 Modify Grafana Service to Use LoadBalancer
 kubectl patch svc prometheus-grafana -n monitoring -p '{"spec": {"type":
 "LoadBalancer"}}'
+
 Get External Access URLs
+
 kubectl get svc -n monitoring prometheus-kube-prometheus-prometheus
 prometheus-grafana
+
 Look for the EXTERNAL-IP field.
 Access:
 • Prometheus: http://<EXTERNAL-IP>:9090
@@ -191,11 +200,18 @@ and add the inbound rules and the port which have to open and accessed .
 A&er it will connect using with node ip and port .
 • If u are using eks go to the security group a@ached to the vm’s and add
 inbound rules.
+
+####
 3⃣ Expose Services Using Ingress
+
+azure has easy way to connect to ingress services , after all the deployment we can go to aks service and on the ingress in aks , goonce and search it u will know . 
+
 Ingress provides a single entry point using AWS ALB Ingress Controller.
+
 1. Install AWS ALB Ingress Controller
 helm repo add eks https://aws.github.io/eks-charts
 helm repo update
+
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller
 \
 --set clusterName=my-eks-cluster \
@@ -203,8 +219,11 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller
 --set region=us-east-1 \
 --set vpcId=<VPC_ID> \
 -n kube-system
+
 2. Create an Ingress Resource
 Create a file grafana-ingress.yaml:
+
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -216,19 +235,23 @@ spec:
 ingressClassName: alb
 rules:
 - host: grafana.mydomain.com
-http:
-paths:
-- path: /
-pathType: Prefix
-backend:
-service:
-name: prometheus-grafana
-port:
-number: 80
+  http:
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+       service:
+       name: prometheus-grafana
+       port:
+        number: 80
+
+
 Apply it:
 kubectl apply -f grafana-ingress.yaml
+
 3. Get the Ingress URL
 kubectl get ingress -n monitoring .
+
 Once the ALB is provisioned, you can access Grafana at http://grafana.mydomain.com.
 • But A&er this if you try to access this external IP it will not open this is
 beacouse u haven’t opened the inbound rule,
@@ -237,6 +260,7 @@ and add the inbound rules and the port which have to open and accessed .
 A&er it will connect using with node ip and port .
 • If u are using eks go to the security group a@ached to the vm’s and add
 inbound rules.
+
 Conclusion
 Method Access Type Pros Cons
 NodePort Local only via Node
