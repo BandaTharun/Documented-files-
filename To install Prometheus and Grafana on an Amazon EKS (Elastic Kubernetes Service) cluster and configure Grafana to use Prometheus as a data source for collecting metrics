@@ -10,7 +10,7 @@ as a data source for collecting metrics,
 
 follow these step-by-step
 instructions.
-To copy code :  https://chatgpt.com/share/67c30ba2-3af4-8006-a925-248a5ff047be 
+To copy code :  https://chatgpt.com/share/67d89e3b-7fe4-8006-a616-1ef50e83a927
 
 
 Step 1: Deploy Prometheus & Grafana Using Helm
@@ -204,7 +204,30 @@ inbound rules.
 ####
 3⃣ Expose Services Using Ingress
 
-azure has easy way to connect to ingress services , after all the deployment we can go to aks service and on the ingress in aks , goonce and search it u will know . 
+azure has easy way to connect to ingress services , after all the deployment we can go to aks service and on the ingress in aks , 
+go once and search it u will know . 
+
+##  AWS  ###
+
+to expose service as ingress in AWS , before creating alb , u have to configure the current eks cluster to use  odic driver to act
+as identity management and talk with aws , beacouse the alb controller simller like ingress controler will talk with aws services using odic 
+and congigure it to create alb controller . 
+
+export cluster_name=demo-cluster # in cluster_name use name of your cluster 
+
+oidc_id=$(aws eks describe-cluster --name $cluster_name --query "cluster.identity.oidc.issuer" --output text | cut -d '/' -f 5) 
+
+Check if there is an IAM OIDC provider configured already
+
+aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4\n
+
+If 221 not run , run the below command
+
+eksctl utils associate-iam-oidc-provider --cluster $cluster_name --approve
+
+it acts like a identity manager and give access to create resources or  talk with aws resources . 
+so in order to talk with odic driver we need to create a user role also after odic installation u have to create user role or pod role accocunt 
+to give acces to create resourcess . 
 
 Ingress provides a single entry point using AWS ALB Ingress Controller.
 
