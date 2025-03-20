@@ -210,8 +210,8 @@ go once and search it u will know .
 ##  AWS  ###
 
 to expose service as ingress in AWS , before creating alb , u have to configure the current eks cluster to use  odic driver to act
-as identity management and talk with aws , beacouse the alb controller simller like ingress controler will talk with aws services using odic 
-and congigure it to create alb controller . 
+as identity management and talk with aws , beacouse the alb controller simliler like ingress controler will talk with aws services using odic 
+and congigure it to create alb loadblancer. 
 
 refer this video for for any issues : https://www.youtube.com/watch?v=S8U7A-eGdOs&t=203s
 
