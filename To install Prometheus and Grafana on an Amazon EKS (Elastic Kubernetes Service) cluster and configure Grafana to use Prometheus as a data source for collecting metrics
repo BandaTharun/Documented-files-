@@ -204,13 +204,17 @@ inbound rules.
 ####
 3⃣ Expose Services Using Ingress
 
-azure has easy way to connect to ingress services , after all the deployment we can go to aks service and on the ingress in aks , 
+azure has easy way to connect to ingress services , after all the deployment we can go to aks service and go on the ingress in aks concole webpage, 
 go once and search it u will know . 
 
 ##  AWS  ###
 
-to expose service as ingress in AWS , before creating alb , u have to configure the current eks cluster to use  odic driver to act
-as identity management and talk with aws , beacouse the alb controller simller like ingress controler will talk with aws services using odic 
+to expose service as ingress in AWS , before deploying albloadblancer , we have to configure the current eks cluster to use  odic driver to act
+as identity management and help to talk with aws service , 
+then we should also  
+
+
+beacouse the alb controller simller like ingress controler will talk with aws services using odic 
 and congigure it to create alb controller . 
 
 refer this video for for any issues : https://www.youtube.com/watch?v=S8U7A-eGdOs&t=203s
