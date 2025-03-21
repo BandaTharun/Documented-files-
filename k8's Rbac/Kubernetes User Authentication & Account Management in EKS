@@ -1,5 +1,18 @@
 # Kubernetes User Authentication & Account Management in EKS
 
+
+Below link Explians about different type of role like cluster role and namespace role and to attach them to serive account 
+
+https://medium.com/@muppedaanvesh/a-hand-on-guide-to-kubernetes-rbac-with-a-user-creation-%EF%B8%8F-1ad9aa3cafb1
+
+For different types user account in k8’s refer this 
+https://chatgpt.com/c/67d8c03d-bb74-8006-86ef-bb66036560c9
+
+
+For k8’s different roles and role bindings refer this . 
+https://chatgpt.com/c/67aef149-1c70-8006-821d-3e654d242322
+
+
 k8's rbac full concepts .
 
 Kubernetes User Management: Service Accounts vs. User Accounts
