@@ -4,7 +4,7 @@ as a data source for collecting metrics and exposing it using portforward or nod
 if u want to see how to expose grafana service using portforwarding go 42 line code ,  node port go to code line 115 ,
 for exposing service using load blancer go to code line 175 , ingress and node port go to code 204
 
-if you want to see how to configure the grafana to use promethus as data source and gather metrics and display , fallow code from 
+if you want to see how to configure the grafana to use promethus as data source and gather metrics and display , fallow code from  82
 
 Steps To install Prometheus and Grafana on an Amazon EKS (Elastic
 Kubernetes Service) cluster and configure Grafana to use Prometheus
