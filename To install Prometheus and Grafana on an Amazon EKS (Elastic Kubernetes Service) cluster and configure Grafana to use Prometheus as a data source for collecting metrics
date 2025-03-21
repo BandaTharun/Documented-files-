@@ -4,6 +4,8 @@ as a data source for collecting metrics and exposing it using portforward or nod
 if u want to see how to expose grafana service using portforwarding go 42 line code ,  node port go to code line 115 ,
 for exposing service using load blancer go to code line 175 , ingress and node port go to code 204
 
+if you want to see how to configure the grafana to use promethus as data source and gather metrics and display , fallow code from 
+
 Steps To install Prometheus and Grafana on an Amazon EKS (Elastic
 Kubernetes Service) cluster and configure Grafana to use Prometheus
 as a data source for collecting metrics, 
@@ -74,17 +76,40 @@ kubectl get secret -n monitoring prometheus-grafana -o
 jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
 Use these credentials to log in to Grafana.
+
+
 ###
+fallow this steps to configre the grafana to use promothus as datasource . 
+
+
+before this expose the Prometheus as local service or node port or loadblancer port or ingress , 
+exposing the promothus to outside world is up on requriment , u can also stop it expose it outside world and still configure the grafana to use a 
+local service ip to collect data , 
+
+only grafana is need to expose to outside world , to visualise it . 
+
 Step 4: Configure Prometheus as a Data Source in
 Grafana
-1. Log in to Grafana at http://localhost:3000
+1. Log in to Grafana at http://localhost:3000 # 
 2. Navigate to Configuration → Data Sources.
 3. Click "Add Data Source".
 4. Select Prometheus.
 5. In the URL field, enter:
-http://prometheus-kube-prometheus-
+
+  #if u exposed to cluster ip enter cluster ip and port , port will always 9000
+  
+    to search for cluster ip of Prometheus ,
+    
+    use : kubectl get svc -n monitoring
+    
+    In the URL field, enter the Prometheus ClusterIP and port:
+    Click Save & Test.
+
+  # if u exposed the Prometheus using portforward , use localhost:9000 or http://prometheus-kube-prometheus-
 prometheus.monitoring.svc.cluster.local:9090
-6. Click Save & Test.
+
+    Click Save & Test.
+
 ###
 Step 5: Import Kubernetes Dashboards
 1. In Grafana, go to Dashboards → Import.
