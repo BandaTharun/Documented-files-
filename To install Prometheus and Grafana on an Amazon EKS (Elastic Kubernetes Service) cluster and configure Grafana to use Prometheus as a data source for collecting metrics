@@ -12,8 +12,10 @@ follow these step-by-step
 instructions.
 To copy code :  https://chatgpt.com/share/67d89e3b-7fe4-8006-a616-1ef50e83a927
 
+###
 
 Step 1: Deploy Prometheus & Grafana Using Helm
+
 We will use the Prometheus Community Helm Chart to deploy both Prometheus and
 Grafana.
 1. Add the Prometheus Helm Repository
@@ -32,7 +34,11 @@ monitoring
 
 This installs Prometheus, Grafana, and the necessary exporters to collect Kubernetes
 metrics.
-#####
+
+-- till here the installing the promothus and grafana is done . go up staing lines of code and check which type of network service u want to use --
+
+####
+
 Step 2: Expose Prometheus & Grafana Services
 
 By default, these services are available inside the cluster. You can access them externally
