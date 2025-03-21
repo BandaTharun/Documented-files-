@@ -1,8 +1,8 @@
 To install Prometheus and Grafana on an Amazon EKS (Elastic Kubernetes Service) cluster and configure Grafana to use Prometheus 
-as a data source for collecting metrics and exposing it using node port , load blancer and ingress service falow this file . 
+as a data source for collecting metrics and exposing it using portforward or node port or load blancer and ingress service falow this file . 
 
-if u want to see how to expose grafana service using node port go to code line 115 , for exposing service using load blancer go to code line 175 , 
-ingress and node port go to code 204
+if u want to see how to expose grafana service using portforwarding go 42 line code ,  node port go to code line 115 ,
+for exposing service using load blancer go to code line 175 , ingress and node port go to code 204
 
 Steps To install Prometheus and Grafana on an Amazon EKS (Elastic
 Kubernetes Service) cluster and configure Grafana to use Prometheus
@@ -39,17 +39,17 @@ metrics.
 
 ####
 
-Step 2: Expose Prometheus & Grafana Services
+By default, these services are available inside the cluster. 
 
-By default, these services are available inside the cluster. You can access them externally
-using kubectl port-forward or an ELB/ALB Ingress Controller.
+Expose Prometheus & Grafana Services access them externally using kubectl port-forward 
 
-1. Port-forward Prometheus here we are exposing only k8's api-server metrics , if u want u can expose node metrics to grafance and see 
+1. Port-forward Prometheus here we are exposing only k8's api-server metrics , 
+if u want u can expose node metrics to grafance u can also do that , but here we are only exposing k8's api server metrics. 
  
 kubectl port-forward -n monitoring svc/prometheus-kube-prometheus-
 prometheus 9090:9090
 
-after this it will start forwarding the traffic from local host to the pod
+after this the local system will farward the traffic from local host to the prometheus pods
 , for next execution process use new terminal , u cant use the same one
 beacouse it is in process of forwarding .
 
@@ -59,8 +59,8 @@ You can now access Prometheus at http://localhost:9090.
 
 kubectl port-forward -n monitoring svc/prometheus-grafana 3000:80 .
 
-after this it will start forwarding the traffic from local host to the pod
-, for next execution process use new terminal , u cant use the same one
+after this the local sysyem will start forwarding the traffic from local host to the pod .
+for next execution process use new terminal , u cant use the same one
 beacouse it is in process of forwarding .
 
 Grafana will be available at http://localhost:3000.
