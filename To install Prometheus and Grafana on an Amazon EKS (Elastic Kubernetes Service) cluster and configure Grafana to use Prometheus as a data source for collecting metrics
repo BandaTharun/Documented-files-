@@ -209,12 +209,52 @@ go once and search it u will know .
 
 ##  AWS  ###
 
+## Requirements for Deploying an ALB Load Balancer ### 
+
+Prerequisites Before Deploying ALB
+
+1. Before creating or deploying an Application Load Balancer (ALB), the following steps must be completed:
+
+     #1. Granting Cluster-Level Access
+      
+     To allow ALB to communicate with the Kubernetes (K8s) API server and forward traffic to the appropriate network services within the cluster,
+     we need to configure a service account with the necessary permissions.
+ 
+     Steps:
+     ##Create a Service Account – Define a Kubernetes service account that will be used by the ALB controller.
+     ##Create a Cluster Role – Assign the necessary permissions to the service account.
+     ##Bind the Cluster Role – Use a RoleBinding or ClusterRoleBinding to link the service account with the cluster role.
+     
+     2. Granting AWS-Level Access
+     
+     To enable ALB to communicate with AWS services, we need an OpenID Connect (OIDC) provider for identity verification 
+     and an AWS IAM role with appropriate permissions.
+     
+     Steps:
+     ##Enable OIDC Provider – Ensure that an OIDC provider is enabled for the Kubernetes cluster.
+     ##Create an AWS IAM Role – Define a role with necessary policies for ALB operations.
+     ##Configure the Service Account – Associate the Kubernetes service account (created in Step 1) with the AWS IAM role 
+     to enable communication with AWS services.
+     ##Deploying ALB Using Helm Chart
+     
+2. Once the necessary permissions are in place, the final step is to configure and deploy the ALB using Helm.
+    
+    Steps:
+    ##Ensure Helm is Installed – Verify that Helm is installed on the system.
+    ##Obtain the Required Helm Chart – Fetch the Helm chart for installing the ALB controller.
+    ##Configure the Helm Chart – Modify the chart configuration to use the previously created service account.
+      This ensures the ALB controller can deploy ALB instances and forward traffic between AWS and the Kubernetes network services.
+
+
+#######
+
+---oidc----
 to expose service as ingress in AWS , before deploying albloadblancer , we have to configure the current eks cluster to use  odic driver to act
 as identity management and help to talk with aws service , 
 then we should also  
 
 
-beacouse the alb controller simller like ingress controler will talk with aws services using odic 
+beacouse the alb controller is simller like ingress controler which  will talk with aws services using odic 
 and congigure it to create alb controller . 
 
 refer this video for for any issues : https://www.youtube.com/watch?v=S8U7A-eGdOs&t=203s
@@ -231,7 +271,14 @@ If 221 not run , run the below command
 
 eksctl utils associate-iam-oidc-provider --cluster $cluster_name --approve
 
-it acts like a identity manager and give access to create resources or  talk with aws resources . 
+the odic  acts like a identity manager which check for id  and give access to create resources or  talk with aws resources . 
+
+----oidc-----
+
+create a aws identity using i am role or iam user 
+and attach the 
+
+
 so in order to talk with odic driver we need to create a user role also after odic installation u have to create user role or pod role accocunt 
 to give acces to create resourcess . 
 
