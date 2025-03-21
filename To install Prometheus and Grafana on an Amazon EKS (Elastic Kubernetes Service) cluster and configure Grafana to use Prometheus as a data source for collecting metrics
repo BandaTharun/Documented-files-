@@ -1,7 +1,7 @@
 To install Prometheus and Grafana on an Amazon EKS (Elastic Kubernetes Service) cluster and configure Grafana to use Prometheus 
 as a data source for collecting metrics and exposing it using node port , load blancer and ingress service falow this file . 
 
-if u want to see how to expose service using node port go to code line 115 , for exposing service using load blancer go to code line 175 , 
+if u want to see how to expose grafana service using node port go to code line 115 , for exposing service using load blancer go to code line 175 , 
 ingress and node port go to code 204
 
 Steps To install Prometheus and Grafana on an Amazon EKS (Elastic
