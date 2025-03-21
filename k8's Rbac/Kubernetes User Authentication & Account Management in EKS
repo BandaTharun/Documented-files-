@@ -1,5 +1,66 @@
 # Kubernetes User Authentication & Account Management in EKS
 
+k8's rbac full concepts .
+
+Kubernetes User Management: Service Accounts vs. User Accounts
+
+  #In Kubernetes (K8s), there are two primary types of users:
+  
+      1. Service Accounts: Managed within the Kubernetes cluster itself.
+      2. User Accounts: Managed externally by identity providers such as AWS, Azure, or other authentication services.
+        A standard Kubernetes cluster natively manages only service accounts and does not manage user accounts. 
+        User accounts are typically managed externally by cloud service providers or enterprise identity management systems.
+
+User Management in AWS Kubernetes (EKS)
+In enterprise environments like AWS, identity and access management (IAM) is used to create and manage multiple users. 
+IAM allows attaching policies to users, which define their permissions to access and perform actions on AWS services, including Kubernetes clusters (EKS).
+    IAM Permissions and Roles in AWS
+    AWS IAM enables organizations to create multiple user accounts and define their permissions through IAM policies. 
+    These policies specify what a user can do within AWS services, including EKS. Examples of permission levels include:
+    * Read-Only Access: Users can only list or view resources within an EKS cluster.
+    * Cluster Administrator: Users can create, delete, or update EKS clusters.
+    * Custom Permissions: Users can be assigned specific permissions, such as creating and managing nodes but not deleting clusters.
+    However, IAM policies only control access at the AWS management level (outer-level management of the cluster). They do not control access inside the Kubernetes cluster.
+    Access Control Inside the Kubernetes Cluster
+
+    Within a Kubernetes cluster, access to resources such as pods, secrets, deployments, and services is controlled by Role-Based Access Control (RBAC). 
+   Kubernetes RBAC defines what actions users and service accounts can perform inside the cluster.
+    * RBAC Roles and RoleBindings:
+        * Roles define permissions at the namespace level.
+        * RoleBindings attach roles to users or service accounts within a namespace.
+        * ClusterRoles provide cluster-wide permissions.
+        * ClusterRoleBindings attach ClusterRoles to users across the entire cluster.
+    For example, a user might have:
+
+    * List-only permissions: Can view pods but cannot modify or delete them.
+    * Deployment permissions: Can create and delete deployments but cannot view secrets.
+    * Admin access: Full control over all cluster resources.
+
+    Authenticating Users in Kubernetes
+    To log in to a Kubernetes cluster, users need authentication. This can be done using multiple ways:
+    1. Kubeconfig File: A kubeconfig file with user credentials can be configured to provide access to the cluster. 
+    3. OIDC Authentication: Many enterprises integrate Kubernetes authentication with OpenID Connect (OIDC) providers like AWS Cognito, Okta, or Azure AD.
+    Once authenticated, RBAC policies define what the user can do inside the cluster.
+    Granular Access Control in Kubernetes
+    * A user with full administrative permissions can perform any action in the cluster.
+    * A user with limited access can only view or list resources.
+    * A user with specific permissions can only interact with certain namespaces or resource types.
+    Summary
+    * AWS IAM controls who can access and manage EKS clusters at the AWS level.
+    * Kubernetes RBAC controls what users can do inside the cluster.
+    * IAM users must be configured in kubeconfig file and  be mapped to Kubernetes users , using authentication methods like AWS IAM Authenticator to check wheather the maped user are actually exited using iam authication .
+    if u have any dout on line 54 go line 64 and read how it works or use the gimi link and understand . 
+    * Kubernetes RBAC policies define detailed permissions for users within the cluster.
+    * Proper role-based access control ensures security and least-privilege access to Kubernetes resources.
+    By carefully configuring IAM policies and Kubernetes RBAC, enterprises can enforce strict access controls and manage Kubernetes clusters securely.
+    
+
+
+Fallow this video which explains how to create users in aws and k8’s and explains the difference between aws user and eks users . what type permission does aws user can have if given and what type of permission does k8’s user have . And also explains how to create k8’s users . 
+
+
+how to handle  user accounts , service accounts and grant permissions  to them 
+
 https://gemini.google.com/app/811835e24d95505b?hl=it
 the above link is the gemini if u want u read using that 
 
