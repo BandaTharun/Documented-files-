@@ -1,5 +1,7 @@
 how CREATE persistent VOLUMES IN K8’S AND attach THEM TO msql DATABASE.
 
+watch this video to get full understanding of persistent volume , persistent cleam , storage class . 
+https://youtu.be/LPy6Q-q1MVQ?si=o8Uq-MPwTRHzkl1r
 
 to get the code : https://chatgpt.com/share/67c340ab-9d40-8006-9013-ac66fe199478 
 
