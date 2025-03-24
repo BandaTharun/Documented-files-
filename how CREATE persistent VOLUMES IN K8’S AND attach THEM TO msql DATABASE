@@ -34,7 +34,7 @@ metadata:
   name: mysql-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOnce # make sure it matchs with the pv the pvc will look for pv with this access only . 
   resources:
     requests:
       storage: 5Gi
