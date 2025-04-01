@@ -1,2 +1,19 @@
 fallow this link for knowing about statefullsets in k8's , 
+
+
+read the concept  for some time and understand the code 
+
+cooncept :  
+
+actual concept of statefullsets 
 https://medium.com/@subhampradhan966/comprehensive-guide-to-kubernetes-statefulsets-d3a7f745eb2f
+
+concept of statefullset in eks , 
+https://medium.com/@yakuphanbilgic3/managing-stateful-containers-in-aws-eks-with-amazon-ebs-csi-driver-and-statefulsets-c754d4eceddd , 
+
+for code refer this , 
+https://chat.deepseek.com/a/chat/s/c9cceb36-6b02-41ba-b57e-633000006407 ,
+
+https://chat.deepseek.com/a/chat/s/90954a8a-69d3-4b1c-a7ca-e2d036c09682
+
+
