@@ -5,7 +5,7 @@ read the concept  for some time and understand the code
 
 cooncept :  
 
-actual concept of statefullsets 
+actual concept of statefullsets , pefer here only for the actuall concept , and the next link 
 https://medium.com/@subhampradhan966/comprehensive-guide-to-kubernetes-statefulsets-d3a7f745eb2f
 
 concept of statefullset in eks , 
@@ -15,5 +15,24 @@ for code refer this ,
 https://chat.deepseek.com/a/chat/s/c9cceb36-6b02-41ba-b57e-633000006407 ,
 
 https://chat.deepseek.com/a/chat/s/90954a8a-69d3-4b1c-a7ca-e2d036c09682
+
+
+refer this for understanding how distributed  databases ex:mongodb are deployed as statefull sets in eks , and the problum with 
+ebs volumes for datastorage .
+
+problum : ebs volumes are a aws zones spefic only the instances in the zone are attched to it , this makes problem 
+for high falt-tolerent multi zone deployment of eks. 
+
+go through this links for concept understanding and problum with ebs 
+
+for concept and back story 
+https://chatgpt.com/c/68c1660a-6bd0-832b-8efa-3a23700f922c
+
+the problum and how can we achive mutile region or zone falt-tolerance eks cluster ,
+https://www.perplexity.ai/search/i-have-implemented-proper-prim-e5YF_7dMTx.6FpvAu9vZww
+
+
+
+
 
 
